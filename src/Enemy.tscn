@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Spotlight.png" type="Texture" id=1]
+[ext_resource path="res://TrapTimer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Enemy.gd" type="Script" id=3]
+[ext_resource path="res://aggro loop.wav" type="AudioStream" id=4]
+[ext_resource path="res://gunshot.wav" type="AudioStream" id=5]
+
+[sub_resource type="CapsuleShape" id=1]
+height = 2.22926
+
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 1, 0.698039, 0.698039, 1 )
+
+[sub_resource type="CapsuleMesh" id=3]
+mid_height = 2.232
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 1, 0.164706, 0.164706, 1 )
+
+[sub_resource type="CubeMesh" id=5]
+size = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="SpatialMaterial" id=6]
+flags_transparent = true
+flags_unshaded = true
+params_cull_mode = 2
+albedo_color = Color( 1, 1, 1, 0.305882 )
+albedo_texture = ExtResource( 1 )
+
+[sub_resource type="QuadMesh" id=7]
+
+[sub_resource type="BoxShape" id=8]
+extents = Vector3( 2.57857, 2.17387, 6.37063 )
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 1.34073, 2.17387, 3.64653 )
+
+[node name="Enemy" type="KinematicBody" groups=[
+"enemies",
+"people",
+]]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2552, 2.22292, 0 )
+script = ExtResource( 3 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="CollisionShape"]
+material_override = SubResource( 2 )
+mesh = SubResource( 3 )
+material/0 = null
+
+[node name="HeadPivot" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.336, 0 )
+
+[node name="Head" type="MeshInstance" parent="HeadPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -7.86781e-06, 0.962954 )
+material_override = SubResource( 4 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="VisionCone" type="MeshInstance" parent="HeadPivot/Head"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 9.44258, 0, 21.9359, 0, 9.5885e-07, 0, 0.0357738, 10.0533 )
+material_override = SubResource( 6 )
+cast_shadow = 0
+mesh = SubResource( 7 )
+material/0 = null
+
+[node name="SightArea" type="Area" parent="HeadPivot/Head"]
+
+[node name="CollisionShape" type="CollisionShape" parent="HeadPivot/Head/SightArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.601197, 4.96737 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="HeadPivot/Head/SightArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83253, -0.601197, 8.81015 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="HeadPivot/Head/SightArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8112, -0.601197, 8.81015 )
+shape = SubResource( 9 )
+
+[node name="FeetSensor" type="RayCast" parent="HeadPivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.92765, 0 )
+enabled = true
+exclude_parent = false
+cast_to = Vector3( 0, 0, 2.5 )
+
+[node name="Eye" type="Spatial" parent="."]
+
+[node name="TrapTimer" parent="." instance=ExtResource( 2 )]
+
+[node name="AggroLoopPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 4 )
+unit_size = 17.5
+
+[node name="GunshotTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="GunshotSoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+
+[connection signal="timeout" from="GunshotTimer" to="." method="_on_GunshotTimer_timeout"]

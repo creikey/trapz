@@ -1,3 +1,6 @@
+# Exports
+*.exe
+*.pck
 
 # Godot-specific ignores
 .import/

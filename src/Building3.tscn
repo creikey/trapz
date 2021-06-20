@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://TwoBuildings.tscn" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 13.24, 12.9886, 13.0953 )
+
+[node name="Building3" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29371, 0 )
+
+[node name="Cube" parent="." index="0"]
+visible = false
+
+[node name="Cube001" parent="." index="1"]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 11.0941 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 12.5328, 0 )
+shape = SubResource( 1 )

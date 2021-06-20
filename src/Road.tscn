@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://road.glb" type="PackedScene" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 10.356, 0.441305, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 10.4019, 0.243786, 8.16763 )
+
+[node name="Road" instance=ExtResource( 1 )]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224258, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="." index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224258, 0 )
+
+[node name="LeftSidewalk" type="CollisionShape" parent="StaticBody" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.33348 )
+shape = SubResource( 1 )
+
+[node name="RightSidewalk" type="CollisionShape" parent="StaticBody" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.333 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody" index="2"]
+shape = SubResource( 2 )

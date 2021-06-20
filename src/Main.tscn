@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=2]
@@ -9,75 +9,106 @@
 [ext_resource path="res://LeaveArea.gd" type="Script" id=7]
 [ext_resource path="res://Enemies.gd" type="Script" id=8]
 [ext_resource path="res://PlayerEscapeArea.gd" type="Script" id=9]
+[ext_resource path="res://BrickWall.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Building.tscn" type="PackedScene" id=11]
 [ext_resource path="res://GoldKey.tscn" type="PackedScene" id=12]
+[ext_resource path="res://LampPost.tscn" type="PackedScene" id=13]
+[ext_resource path="res://addons/Sky/sky_texture.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Building2.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Building3.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Road.tscn" type="PackedScene" id=17]
+[ext_resource path="res://cobblestone.png" type="Texture" id=18]
+[ext_resource path="res://cobblestone_normal.png" type="Texture" id=19]
+[ext_resource path="res://Dumpster.tscn" type="PackedScene" id=20]
 
-[sub_resource type="ProceduralSky" id=1]
-sun_latitude = 17.65
-sun_longitude = 21.69
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Environment/Sky_texture")
 
-[sub_resource type="Environment" id=2]
-background_mode = 2
-background_sky = SubResource( 1 )
+[sub_resource type="PanoramaSky" id=2]
+resource_local_to_scene = true
+panorama = SubResource( 1 )
+
+[sub_resource type="Environment" id=3]
+resource_local_to_scene = true
+background_mode = 1
+background_sky = SubResource( 2 )
+background_color = Color( 0.498039, 0.6, 0.701961, 1 )
 ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.21
-ambient_light_sky_contribution = 0.19
+ambient_light_energy = 0.19
+ambient_light_sky_contribution = 0.25
+fog_enabled = true
+fog_depth_begin = 4.7
+fog_depth_end = 142.3
+fog_transmit_enabled = true
+fog_height_min = 8.1
+fog_height_max = -2.0
+fog_height_curve = 1.86607
 ssao_enabled = true
-ssao_intensity = 1.63
+ssao_radius = 0.78
+ssao_intensity = 8.88
 
-[sub_resource type="BoxShape" id=3]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 2.01423, 1.74684, 4.09193 )
 
-[sub_resource type="CapsuleShape" id=4]
+[sub_resource type="CapsuleShape" id=5]
 height = 1.82471
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=6]
+params_cull_mode = 2
+albedo_texture = ExtResource( 18 )
+normal_enabled = true
+normal_scale = 5.8
+normal_texture = ExtResource( 19 )
+uv1_scale = Vector3( 0.15, 0.15, 0.15 )
+uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0, 1, 0.156863, 1 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=8]
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=9]
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 5.39802, 9.24226, 20.1368 )
 
-[sub_resource type="Curve3D" id=9]
+[sub_resource type="Curve3D" id=11]
 _data = {
 "points": PoolVector3Array( 0, 0, 0, 0, 0, 0, -30.1826, 0, 5.18167, 0, 0, 0, 0, 0, 0, -21.1132, 0, 5.18167, 0, 0, 0, 0, 0, 0, -9.99022, 0, 5.35279, 0, 0, 0, 0, 0, 0, 0.961596, 0, 5.69503, 0, 0, 0, 0, 0, 0, 7.97761, 0, 6.2084, 0, 0, 0, 0, 0, 0, 14.9936, 0, 5.26723, 0, 0, 0, 0, 0, 0, 21.3251, 0, 2.01591, 0, 0, 0, 0, 0, 0, 26.9327, 0, -1.88002, 0, 0, 0, 0, 0, 0, 34.9071, 0, -8.47163, 0, 0, 0, 0, 0, 0, 46.5434, 0, -13.9475, 0, 0, 0, 0, 0, 0, 56.0407, 0, -18.14, 0, 0, 0, 0, 0, 0, 65.0246, 0, -19.9368, 0, 0, 0, 0, 0, 0, 71.4344, 0, -21.705, 0, 0, 0, 0, 0, 0, 91.0792, 0, -25.4815, 0, 0, 0, 0, 0, 0, 97.8385, 0, -26.5938, 0, 0, 0, 0, 0, 0, 106.395, 0, -27.0216, 0, 0, 0, 0, 0, 0, 112.855, 0, -27.3245 ),
 "tilts": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 )
 }
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.109804, 0.819608, 0.301961, 1 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=13]
 bg_color = Color( 0.14902, 0.25098, 0.145098, 1 )
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.3, 0.3, 0.3 )
 
 [node name="Main" type="Spatial"]
 
 [node name="Environment" type="Spatial" parent="."]
 
+[node name="Sky_texture" parent="Environment" instance=ExtResource( 14 )]
+direction_light_path = NodePath("../SkyDirectionalLight")
+sun_position = Vector3( 7.092, 10.104, 2.55 )
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
-environment = SubResource( 2 )
+environment = SubResource( 3 )
 
-[node name="DirectionalLight" type="DirectionalLight" parent="Environment"]
-transform = Transform( 0.798741, 0.144641, 0.584031, -0.157773, -0.886357, 0.435291, 0.580621, -0.439829, -0.685149, 0, 8.04502, 0 )
+[node name="SkyDirectionalLight" type="DirectionalLight" parent="Environment"]
+transform = Transform( 0.33835, -0.754356, 0.562605, -8.9407e-08, 0.597936, 0.801546, -0.941012, -0.271236, 0.20229, 0, 0, 0 )
+light_color = Color( 1, 0.976471, 0.8, 1 )
+light_energy = 0.38
 shadow_enabled = true
-
-[node name="Building" parent="Environment" instance=ExtResource( 11 )]
-transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, -17.9612, 0, -35.2091 )
-
-[node name="Building2" parent="Environment" instance=ExtResource( 11 )]
-transform = Transform( -1.05073, 0, -6.92069, 0, 7, 0, 6.92069, 0, -1.05073, 92.2182, 0, 14.1563 )
 
 [node name="Player" type="KinematicBody" parent="." groups=[
 "people",
 "players",
 ]]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -18.3636, 4.24169, 21.8685 )
+transform = Transform( 1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -18.3636, 4.24169, 21.8685 )
 script = ExtResource( 1 )
 
 [node name="CameraPivot" type="Spatial" parent="Player"]
@@ -95,17 +126,18 @@ cast_to = Vector3( 0, 0, -10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player/CameraPivot/Camera/PickpocketArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86265e-07, 0, -4.83228 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Player"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.647938, 0 )
-shape = SubResource( 4 )
+shape = SubResource( 5 )
 
 [node name="TrapTimer" parent="Player" instance=ExtResource( 5 )]
 
 [node name="Level" type="Spatial" parent="."]
 
 [node name="CSGCombiner" type="CSGCombiner" parent="Level"]
+material_override = SubResource( 6 )
 use_collision = true
 
 [node name="CSGBox" type="CSGBox" parent="Level/CSGCombiner"]
@@ -114,14 +146,8 @@ height = 0.612463
 depth = 143.498
 
 [node name="CSGBox5" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34658, -11.4581, 38.2048 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.34658, -38.0869, 38.2048 )
 width = 242.717
-height = 70.7636
-depth = 19.396
-
-[node name="CSGBox7" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -45.0919, -11.4581, -6.40862 )
-width = 110.029
 height = 70.7636
 depth = 19.396
 
@@ -137,36 +163,6 @@ width = 110.029
 height = 70.4099
 depth = 19.396
 
-[node name="CSGBox2" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4587, -4.28231, -14.3497 )
-width = 54.6069
-height = 27.7695
-depth = 7.42529
-
-[node name="CSGBox4" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 0.816299, 0, 0.57763, 0, 1, 0, -0.57763, 0, 0.816299, 30.968, -4.28231, -28.8972 )
-width = 54.6069
-height = 27.7695
-depth = 7.42529
-
-[node name="CSGBox10" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 0.99575, 0, 0.0920925, 0, 1, 0, -0.0920925, 0, 0.99575, 79.7398, -4.28231, -44.1379 )
-width = 54.6069
-height = 27.7695
-depth = 7.42529
-
-[node name="CSGBox11" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 0.99575, 0, 0.0920925, 0, 1, 0, -0.0920925, 0, 0.99575, 79.7398, -4.28231, -5.90043 )
-width = 54.6069
-height = 27.7695
-depth = 7.42529
-
-[node name="CSGBox3" type="CSGBox" parent="Level/CSGCombiner"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4587, -4.28231, 13.001 )
-width = 54.6069
-height = 27.7695
-depth = 7.42529
-
 [node name="CSGBox9" type="CSGBox" parent="Level/CSGCombiner"]
 transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 34.261, -4.2823, 1.16631 )
 width = 54.6069
@@ -178,23 +174,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2152, 3.70604, 22.5697 )
 script = ExtResource( 9 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Level/PlayerEscapeArea"]
-material_override = SubResource( 5 )
-mesh = SubResource( 6 )
+material_override = SubResource( 7 )
+mesh = SubResource( 8 )
 material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/PlayerEscapeArea"]
-shape = SubResource( 7 )
+shape = SubResource( 9 )
 
 [node name="LeaveArea" type="Area" parent="Level"]
 script = ExtResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Level/LeaveArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 108.57, 0, -28.634 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="CarabanPath" type="Path" parent="Level"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.754236, 0 )
-curve = SubResource( 9 )
+curve = SubResource( 11 )
 
 [node name="Target" type="PathFollow" parent="Level/CarabanPath"]
 transform = Transform( 0.999118, 0, 0.0419938, 0, 1, 0, -0.0419938, 0, 0.999118, -10.1842, 0, 5.3498 )
@@ -210,6 +206,197 @@ script = ExtResource( 4 )
 transform = Transform( 0.998166, 0, 0.0605392, 0, 1, 0, -0.0605392, 0, 0.998166, -25.1836, 0, 5.18167 )
 offset = 5.0
 script = ExtResource( 4 )
+
+[node name="Models" type="Spatial" parent="Level"]
+
+[node name="BrickWall" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -33.9594, 0, 12.3096 )
+
+[node name="BrickWall2" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18.7625, 0, 12.3096 )
+
+[node name="BrickWall3" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.68733, 0, 12.3096 )
+
+[node name="BrickWall22" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 29.8073, 0, 33.8609 )
+
+[node name="BrickWall23" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 45.0042, 0, 33.8609 )
+
+[node name="BrickWall24" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 60.0794, 0, 33.8609 )
+
+[node name="BrickWall19" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -33.9594, 0, 33.7457 )
+
+[node name="BrickWall20" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -18.7625, 0, 33.7457 )
+
+[node name="BrickWall21" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -0.128051, 0, -0.991767, 0, 1, 0, 0.991767, 0, -0.128051, -3.68733, 0, 33.7457 )
+
+[node name="BrickWall15" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -28.646, 0, -7.07119 )
+
+[node name="BrickWall18" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -43.9251, 0, -7.07119 )
+
+[node name="BrickWall16" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -13.4491, 0, -7.07119 )
+
+[node name="BrickWall17" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.62605, 0, -7.07119 )
+
+[node name="BrickWall4" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 59.3008, 0, -14.0206 )
+
+[node name="BrickWall5" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 74.4977, 0, -14.0206 )
+
+[node name="BrickWall6" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 89.5729, 0, -14.0206 )
+
+[node name="BrickWall25" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -0.403242, 0, -0.915093, 0, 1, 0, 0.915093, 0, -0.403242, 60.065, 0, -13.8393 )
+
+[node name="BrickWall26" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 74.4977, 0, -8.45879 )
+
+[node name="BrickWall27" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 89.5729, 0, -8.45879 )
+
+[node name="BrickWall8" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 66.8995, 0, -35.8616 )
+
+[node name="BrickWall9" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 82.0964, 0, -35.8616 )
+
+[node name="BrickWall10" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 97.1716, 0, -35.8616 )
+
+[node name="BrickWall11" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 28.0246, 0, -14.2469 )
+
+[node name="BrickWall14" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 16.0098, 0, -7.51999 )
+
+[node name="BrickWall12" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 41.1855, 0, -21.8453 )
+
+[node name="BrickWall13" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 54.241, 0, -29.3829 )
+
+[node name="BrickWall7" parent="Level/Models" instance=ExtResource( 10 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 104.013, 0, -12.8357 )
+
+[node name="LampPost" parent="Level/Models" instance=ExtResource( 13 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.59371, 0, 16.1271 )
+
+[node name="LampPost2" parent="Level/Models" instance=ExtResource( 13 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 24.6115, 0, -15.7532 )
+
+[node name="LampPost3" parent="Level/Models" instance=ExtResource( 13 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 43.211, 0, -24.7721 )
+
+[node name="LampPost4" parent="Level/Models" instance=ExtResource( 13 )]
+transform = Transform( 0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, 0.5, 67.9954, 0, -39.2837 )
+
+[node name="Building" parent="Level/Models" instance=ExtResource( 11 )]
+transform = Transform( 7, 0, 0, 0, 7, 0, 0, 0, 7, -17.9612, 2.31141, -35.2091 )
+
+[node name="Building2" parent="Level/Models" instance=ExtResource( 11 )]
+transform = Transform( -1.05073, 0, -6.92069, 0, 7, 0, 6.92069, 0, -1.05073, 92.2182, 0, 14.1563 )
+
+[node name="Building3" parent="Level/Models" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 84.1936, 0, 37.6029 )
+
+[node name="Building7" parent="Level/Models" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -44.7619, 3.7578, 24.8533 )
+
+[node name="Building8" parent="Level/Models" instance=ExtResource( 15 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -44.7619, 3.7578, 2.65906 )
+
+[node name="Building9" parent="Level/Models" instance=ExtResource( 15 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -44.7619, 3.7578, -19.3578 )
+
+[node name="Building4" parent="Level/Models" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4532, 1.29371, -34.8019 )
+
+[node name="Building5" parent="Level/Models" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1619, 1.29371, 46.6788 )
+
+[node name="Building6" parent="Level/Models" instance=ExtResource( 16 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 16.1943, 27.6478, 45.6441 )
+
+[node name="Road" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1767, 0, 1.29831 )
+
+[node name="Road2" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4342, 0, 1.30846 )
+
+[node name="Road3" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.89152, 0, 1.30846 )
+
+[node name="Road10" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -33.1767, 0, 23.3049 )
+
+[node name="Road11" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.4342, 0, 23.3151 )
+
+[node name="Road12" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.89152, 0, 23.3151 )
+
+[node name="Road13" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2851, 0, 23.3049 )
+
+[node name="Road14" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 49.0276, -0.0472245, 23.3151 )
+
+[node name="Road15" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.3533, 0, 23.3151 )
+
+[node name="Road16" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 30.0248, 3.8147e-06, 2.52966 )
+
+[node name="Road17" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7673, 3.8147e-06, 2.53981 )
+
+[node name="Road18" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 71.093, 3.8147e-06, 2.53981 )
+
+[node name="Road19" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 89.4177, 0.0250113, 2.52966 )
+
+[node name="Road20" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 110.16, 3.8147e-06, 2.53981 )
+
+[node name="Road21" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 130.486, 3.8147e-06, 2.53981 )
+
+[node name="Road4" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 22.4845, -0.0445752, 0.321846 )
+
+[node name="Road5" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 40.4225, -0.0445747, -10.0283 )
+
+[node name="Road6" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 58.2975, -0.0445714, -20.3825 )
+
+[node name="Road7" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 72.3725, 0.164091, -24.7554 )
+
+[node name="Road8" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 93.2337, 0.164091, -24.7554 )
+
+[node name="Road9" parent="Level/Models" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 114.304, 0.164091, -24.7554 )
+
+[node name="Dumpster" parent="Level/Models" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26937, 1.61274, 14.8767 )
+
+[node name="Dumpster2" parent="Level/Models" instance=ExtResource( 20 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.98027, 1.61274, 32.0674 )
 
 [node name="Traps" type="Spatial" parent="."]
 
@@ -285,8 +472,8 @@ __meta__ = {
 [node name="HealthBar" type="ProgressBar" parent="UILayer/UI"]
 margin_right = 300.0
 margin_bottom = 30.0
-custom_styles/fg = SubResource( 10 )
-custom_styles/bg = SubResource( 11 )
+custom_styles/fg = SubResource( 12 )
+custom_styles/bg = SubResource( 13 )
 max_value = 1.0
 value = 0.46
 __meta__ = {
@@ -297,7 +484,7 @@ __meta__ = {
 script = ExtResource( 8 )
 
 [node name="Target" parent="Enemies" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.7002, 2.22292, -3.54519 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -19.0753, 2.22292, -3.54519 )
 
 [node name="PickpocketTarget" type="Area" parent="Enemies/Target" groups=[
 "pickpocket_targets",
@@ -305,7 +492,7 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.700
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06868, -0.770047, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Enemies/Target/PickpocketTarget"]
-shape = SubResource( 12 )
+shape = SubResource( 14 )
 
 [node name="GoldKey" parent="Enemies/Target/PickpocketTarget" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.149337, 0, 0 )
@@ -315,7 +502,7 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.700
 left_offset = 2.0
 
 [node name="Behind2" parent="Enemies" instance=ExtResource( 2 )]
-transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.7002, 2.22292, 1.08191 )
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -19.0753, 2.22292, 1.08191 )
 left_offset = 4.0
 
 [connection signal="body_entered" from="Level/PlayerEscapeArea" to="Level/PlayerEscapeArea" method="_on_PlayerEscapeArea_body_entered"]
